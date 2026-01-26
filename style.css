@@ -938,4 +938,92 @@ h3.right-label {
     background: var(--porto-clr) !important;
     border-radius: 5px;
     padding: 4px 12px;     /* Atas-Bawah: 4px, Kanan-Kiri: 12px */
+
+}
+
+
+
+
+
+
+
+
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+
+/* Untuk Tablet & HP (Layar di bawah 992px) */
+@media (max-width: 992px) {
+    /* Hero Section: Foto di atas, Teks di bawah */
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .hero-image img {
+        width: 250px;
+        height: 250px;
+    }
+
+    /* Skills: Kolom Kiri & Kanan jadi bertumpuk */
+    .skills-main-container {
+        flex-direction: column;
+        gap: 40px;
+        padding: 0 20px;
+    }
+
+    /* Experience: Detail items berjejer ke bawah */
+    .details-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* Portfolio: Card jadi full lebar dan teks rata tengah */
+    .porto-item, .porto-item:nth-child(even) {
+        flex-direction: column;
+        width: 100% !important;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .porto-details {
+        text-align: center !important;
+    }
+
+    .porto-links {
+        justify-content: center !important;
+    }
+}
+
+/* Untuk HP Kecil (Layar di bawah 600px) */
+@media (max-width: 600px) {
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .navbar {
+        padding: 15px 20px;
+    }
+
+    /* Sembunyikan navigasi teks, ganti dengan scroll atau menu icon nanti */
+    .nav-links {
+        gap: 15px;
+        font-size: 0.8rem;
+    }
+
+    /* Pastikan Timeline Education tetap rapi */
+    .edu-item {
+        width: 100%;
+        padding: 20px;
+        text-align: left !important;
+    }
+    
+    .timeline-line {
+        left: 20px; /* Geser garis ke pinggir kiri */
+    }
+    
+    .edu-dot {
+        left: 12px !important;
+    }
 }
