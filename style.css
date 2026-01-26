@@ -1,0 +1,941 @@
+/* ========== Animasi Background Website ========== */
+#particles-js {
+    position: fixed; /* Selalu di tempat meski di-scroll */
+    width: 100%;
+    height: 100%;
+    background-color: #020202; /* Warna ruang angkasa pekat */
+    z-index: -1; /* Berada di lapisan paling bawah */
+    top: 0;
+    left: 0;
+}
+
+/* Buat section utama jadi transparan bagi kursor */
+.page-section, .experience {
+    pointer-events: none; /* Mouse akan "menembus" section ini ke bintang */
+}
+
+/* KEMBALIKAN kemampuan klik untuk elemen di dalamnya */
+.hero-container, 
+.exp-card, 
+.navbar, 
+.social-sidebar, 
+.hero-text, 
+.hero-image {
+    pointer-events: auto; /* Elemen ini tetap bisa diklik/disentuh */
+}
+
+
+
+
+
+/* ========== Navigation ========== */
+/* 1. Navbar Container */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Logo di kiri, Menu di kanan */
+    align-items: center;
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    width: 100%; /* Menyesuaikan padding agar tidak mentok */
+    z-index: 100;
+    background: transparent; /* Benar-benar transparan */
+    /* Hapus backdrop-filter jika ingin total transparan */
+    
+}
+
+/* 2. Nav Links (List) */
+.nav-links {
+    display: flex;
+    list-style: none; /* Hilangkan titik bullet */
+    gap: 30px; /* Jarak antar menu */
+}
+
+/* 3. Link Style (Warna & Font) */
+.nav-links a {
+    color: white;
+    text-decoration: none; /* Hilangkan garis bawah */
+    font-family: 'Poppins', sans-serif; /* Font modern */
+    font-weight: 500;
+    font-size: 1rem;
+    display: inline-block; /* WAJIB agar efek scale bekerja halus */
+    transition: 0.3s ease-in-out; /* Animasi zoom yang lembut */
+    
+}
+
+/* 4. Hover Effect (UX Tambahan) */
+.nav-links a:hover {
+    color: #676869; 
+    transform: scale(1.2); /* Zoom sebesar 20% */
+    text-shadow: 0 0 15px #9a9b9ecc;
+}
+
+.nav-links a:active {
+    transform: scale(0.95); /* Sedikit mengecil saat diklik */
+}
+
+
+
+
+
+/* ========== Medsos ========= */
+.social-sidebar {
+    position: absolute; 
+    bottom: 30px;    /* Jarak dari bawah layar */
+    align-items: center;
+    display: flex;   /* Berjejer ke samping */
+    gap: 15px;       /* Jarak antar logo */
+    z-index: 1000;   /* Pastikan di atas partikel bintang */
+}
+
+.social-sidebar a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05); /* Efek kaca transparan */
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px; /* Kotak kecil dengan sudut tumpul */
+    display: flex;
+    justify-content: center; /* Logo di tengah secara horizontal */
+    align-items: center;     /* Logo di tengah secara vertikal */
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: 0.3s ease;
+}
+
+/* UX: Efek Hover & Active yang sudah kamu pelajari */
+.social-sidebar a:hover {
+    background: #717174;
+    transform: translateY(-5px) scale(1.1); /* Zoom dan naik sedikit */
+    box-shadow: 0 0 15px rgba(10, 33, 151, 0.8);
+    
+}
+
+.social-sidebar a:active {
+    transform: scale(0.9);
+}
+
+/* Instagram: Gradasi Pink/Orange */
+.social-sidebar a:nth-child(1):hover {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    box-shadow: 0 0 20px rgba(214, 36, 159, 0.6);
+}
+
+/* LinkedIn: Biru Profesional */
+.social-sidebar a:nth-child(2):hover {
+    background: #0077b5;
+    box-shadow: 0 0 20px rgba(0, 119, 181, 0.6);
+}
+
+/* GitHub: Hitam/Abu Gelap */
+.social-sidebar a:nth-child(3):hover {
+    background: #333;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* WhatsApp: Hijau Segar */
+.social-sidebar a:nth-child(4):hover {
+    background: #25d366;
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
+}
+
+/* Facebook: Biru Tua */
+.social-sidebar a:nth-child(5):hover {
+    background: #1877f2;
+    box-shadow: 0 0 20px rgba(24, 119, 242, 0.6);
+}
+
+
+
+
+
+/* ========== Transition Landing Page ========== */
+/* Panggung utama slide */
+.content-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* Mencegah scroll bar muncul saat transisi */
+}
+
+/* Base style untuk semua slide */
+.page-section {
+    position: absolute; /* Menumpuk di satu titik yang sama */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    
+    /* Efek animasi */
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.9); /* Efek zoom-in saat muncul */
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Saat slide aktif */
+.page-section.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    z-index: 10;
+}
+
+
+
+
+
+/* ---------- LANDING PAGE 1 ---------- */
+/* Container Utama Hero */
+/* Pengatur posisi foto di kiri, teks di kanan */
+.hero-container {
+    display: flex;
+    align-items: center;
+    gap: 80px; /* Jarak antara foto dan teks */
+    max-width: 1200px;
+}
+
+/* Styling Foto */
+.hero-image img {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #eeefef;
+    /* Efek cahaya biru di luar angkasa */
+    box-shadow: 0 0 30px rgba(127, 129, 138, 0.6), 0 0 60px rgba(68, 68, 71, 0.3);
+    transition: 0.5s;
+}
+
+.hero-image img:hover {
+    transform: scale(1.2); /* Sedikit membesar saat disentuh */
+    box-shadow: 0 0 50px rgba(93, 94, 95, 0.9);
+}
+
+/* Styling Teks */
+.hero-text h1 {
+    font-size: 4.5rem; /* Ukuran nama besar dan tegas */
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.1;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.hero-text h4 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+.hero-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 500px; /* Agar teks deskripsi tidak terlalu melebar */
+    margin-bottom: 30px;
+    color: #cccccc;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ---------- LANDING PAGE 2 ---------- */
+/* --- SKILLS STYLE --- */
+#skills {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; /* Menjaga Judul tetap di tengah */
+    justify-content: flex-start;
+    padding-top: 100px;
+}
+
+.section-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 60px; /* Jarak ke konten di bawahnya */
+}
+
+/* WADAH KONTEN: Baru pakai Flex di sini */
+.skills-main-container {
+    display: flex; /* Membagi Kiri dan Kanan */
+    justify-content: center;
+    gap: 80px; /* Jarak lega antara kolom */
+    width: 100%;
+    max-width: 1100px;
+    pointer-events: auto;
+}
+
+/* Atur proporsi kolom */
+.skills-left {
+    flex: 1.2; /* Sedikit lebih lebar untuk Technical */
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.skills-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+/* Label Grup */
+.left-label {
+    color: #fefefe; /* Ubah warna teks jadi gelap agar kontras dengan background putih */
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0; 
+    margin-bottom: 20px; 
+    text-align: left;
+    background-color: #2b3030; /* Coba pakai warna hijau neon kamu sebagai background */
+    display: block;        /* Ubah ke block dulu */
+    width: fit-content;    /* PAKSA lebar hanya sebatas isi teksnya */
+    
+    /* Membuat sudut membulat */
+    padding: 5px 20px; /* Tambah padding kiri-kanan agar teks tidak mepet ke pinggiran bulat */
+    border-radius: 50px; /* Angka besar seperti 50px akan membuatnya berbentuk kapsul/pil */
+    
+    /* Tambahan agar lebih keren */
+    font-weight: bold;
+    box-shadow: 0 0 15px rgb(254, 255, 255); /* Efek glow neon */
+}
+
+/* Class khusus untuk sisi kanan agar tidak 'balapan' margin dengan browser */
+.right-label {
+    margin: 0 !important; /* Reset total semua margin bawaan */
+    padding: 0;
+    
+}
+
+h3.right-label {
+     color: #fefefe; /* Ubah warna teks jadi gelap agar kontras dengan background putih */
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0; 
+    margin-bottom: 20px; 
+    text-align: left;
+    background-color: #2b3030; /* Coba pakai warna hijau neon kamu sebagai background */
+    display: block;        /* Ubah ke block dulu */
+    width: fit-content;    /* PAKSA lebar hanya sebatas isi teksnya */
+    
+    /* Membuat sudut membulat */
+    padding: 5px 20px; /* Tambah padding kiri-kanan agar teks tidak mepet ke pinggiran bulat */
+    border-radius: 50px; /* Angka besar seperti 50px akan membuatnya berbentuk kapsul/pil */
+    
+    /* Tambahan agar lebih keren */
+    font-weight: bold;
+    box-shadow: 0 0 15px rgb(254, 255, 255); /* Efek glow neon */
+}
+
+.tag-group.right-label {
+    margin-bottom: 15px !important; /* Jarak antar grup tag */
+}
+
+.tag-group h4 {
+    margin: 0;
+    margin-bottom: 10px; /* Jarak dari sub-judul ke bulatan tag */
+    font-size: 1rem;
+    color: #fff;
+}
+
+/* Skill Group Styling */
+.skill-group {
+    text-align: left;
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.skill-desc {
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+/* Sisi Kanan (Tags Styling) */
+.tag-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Sisi Kanan Tags */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.tag {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    transition: 0.3s ease;
+}
+
+.tag:hover {
+    border-color: #f1f1f1;
+    background: rgb(110, 105, 105);
+    transform: translateY(-3px);
+}
+
+/* Progress Bar (Gunakan logic transform yang sudah kita buat) */
+.progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--clr);
+    box-shadow: 0 0 10px var(--clr);
+    width: var(--w);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.5s cubic-bezier(0.1, 0.42, 0.41, 1);
+}
+
+.page-section.active .progress-fill {
+    transform: scaleX(1);
+}
+
+
+
+
+
+
+
+
+
+
+/* ---------- LANDING PAGE 3 ---------- */
+/* Menaikkan judul ke atas */
+/* Container Utama Section Experience */
+#experience {
+    display: flex;
+    flex-direction: column; /* Konten disusun atas ke bawah */
+    justify-content: flex-start; /* Paksa mulai dari atas */
+    align-items: center; /* Tengah secara horizontal */
+    padding-top: 100px; /* Jarak agar tidak tertutup Navbar (sesuaikan tinggi navbammu) */
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Judul Section tepat di bawah Navbar */
+.section-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px; /* Jarak antara Judul dan Card */
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    margin: 0;
+}
+
+/* Container Horizontal di bawah Judul */
+.exp-container-horizontal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 40px; /* Jarak antara Main Card dan Detail Items */
+    pointer-events: auto; /* Agar bisa diklik */
+}
+
+.exp-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Memastikan semua (H3, Span, P) ke tengah */
+    text-align: center;
+     
+    color: #fefefe; /* Ubah warna teks jadi gelap agar kontras dengan background putih */
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0; 
+    margin-bottom: 20px; 
+    text-align: left;
+    background-color: #2b3030; /* Coba pakai warna hijau neon kamu sebagai background */
+    display: block;        /* Ubah ke block dulu */
+    width: fit-content;    /* PAKSA lebar hanya sebatas isi teksnya */
+    
+    /* Membuat sudut membulat */
+    padding: 5px 20px; /* Tambah padding kiri-kanan agar teks tidak mepet ke pinggiran bulat */
+    border-radius: 50px; /* Angka besar seperti 50px akan membuatnya berbentuk kapsul/pil */
+    
+    /* Tambahan agar lebih keren */
+    font-weight: bold;
+    box-shadow: 0 0 15px rgb(254, 255, 255); /* Efek glow neon */
+}
+
+.exp-summary span {
+    display: block; /* Agar dia mengambil satu baris sendiri */
+    margin-bottom: 5px;
+    color: #f1f1f4;
+    font-weight: 600;
+    text-align: center;
+}
+
+.click-hint {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 10px; /* Jarak dari teks 2024-Present */
+    font-style: italic;
+    transition: all 0.3s ease;
+    display: block; /* Agar jarak margin-top bekerja sempurna */
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Efek Hover saat area kartu disentuh */
+.exp-card:hover .click-hint {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+}
+
+/* Efek Klik */
+.exp-card:active .click-hint {
+    transform: scale(0.9);
+    color: #edeef1;
+}
+
+.exp-card {
+    text-align: center;
+}
+
+/* Wrapper detail yang berjejer horizontal */
+.details-wrapper {
+    display: flex;
+    flex-direction: row; /* Berjejer ke samping */
+    gap: 50px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px) scale(0.95); /* Muncul dari bawah + sedikit zoom */
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efek spring/kenyal */
+}
+
+/* Saat aktif, detail muncul */
+.details-wrapper.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Kotak detail kecil */
+.detail-item {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    width: 200px; /* Ukuran kotak kecil */
+    text-align: center;
+    transition: 0.3s;
+}
+
+.detail-item {
+   background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 20px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.1s ease, background 0.1s ease, border-color 0.1s ease;
+}
+
+.details-wrapper.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.detail-item:hover {
+    background: rgba(189, 189, 189, 0.15);
+    border-color: rgb(255, 254, 254);
+    transform: translateY(-10px); /* Melayang sedikit saat disentuh */
+}
+
+.item-1 { 
+    transition-delay: 0.1s; }
+.item-2 { 
+    transition-delay: 0.2s; }
+.item-3 { 
+    transition-delay: 0.3s; }
+
+    /* Styling Deskripsi di dalam Card agar lebih rapi */
+.exp-desc {
+    font-size: 0.85rem;
+    color: #ccc;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+/* Styling Button Certificate */
+.btn-cert {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 18px;
+    background-color: transparent;
+    color: #00ff88;
+    border: 1px solid #00ff88;
+    border-radius: 50px;
+    text-decoration: none !important; /* Hilangkan garis bawah */
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover Effect */
+.btn-cert:hover {
+    background-color: #00ff88;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+    transform: translateY(-3px);
+}
+
+/* Active Effect */
+.btn-cert:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
+}
+
+/* Memastikan h4 tetap menonjol */
+.detail-item h4 {
+    color: #00ff88;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+
+
+
+
+
+
+
+
+    
+/* ---------- LANDING PAGE 4 ---------- */
+/* --- EDUCATION STYLE --- */
+#education {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 140px;
+    padding-bottom: 80px;
+    height: 100vh;
+    box-sizing: border-box;
+    width: 100%;
+    
+    /* TAMBAHKAN INI: Paksa area di luar timeline agar bisa menangkap mouse */
+    pointer-events: auto !important; 
+    
+    overflow-y: auto; 
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Untuk Chrome, Safari, dan Opera */
+#education::-webkit-scrollbar {
+    display: none;
+}
+
+.edu-timeline {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    margin-top: 40px;
+    pointer-events: auto;
+}
+
+/* Garis tengah bercahaya */
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, #bc13fe, #00f2ff, #ffffff, transparent);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.edu-item {
+    width: 50%;
+    padding: 20px 40px;
+    position: relative;
+    box-sizing: border-box;
+    opacity: 0; /* Untuk animasi muncul */
+    transition: all 0.8s ease;
+}
+
+/* Animasi saat section aktif */
+.page-section.active .edu-item {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.edu-item.left { 
+    left: 0; text-align: right; transform: translateX(-50px); }
+.edu-item.right { 
+    left: 50%; text-align: left; transform: translateX(50px); }
+
+/* Titik Orbit */
+.edu-dot {
+    position: absolute;
+    top: 25px;
+    width: 15px;
+    height: 15px;
+    background: var(--edu-clr);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--edu-clr);
+    z-index: 2;
+}
+
+.left .edu-dot { 
+    right: -7.5px; }
+.right .edu-dot { 
+    left: -7.5px; }
+
+/* Kotak Konten Glassmorphism */
+.edu-content {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Tambahkan border-left/right bercahaya */
+    border-left: 4px solid var(--edu-clr); 
+    box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.5);
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.edu-content:hover {
+    background: #2b3030;
+    border-color: rgb(254, 255, 255);;
+    transform: scale(1.05);
+}
+
+.edu-date { 
+    color: var(--edu-clr); /* Tanggal mengikuti warna tema */ font-weight: bold; font-size: 0.85rem; }
+.edu-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--edu-clr);
+    color: #000;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+/* ---------- LANDING PAGE 5 ---------- */
+/* --- PORTFOLIO STYLE --- */
+#portfolio {
+    /* Gunakan padding untuk mengatur jarak konten dari tepi layar */
+    padding-top: 100px; 
+    padding-bottom: 100px; /* Tambahkan ruang di bawah agar tidak mepet */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Mulai dari atas */
+    
+    height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    
+    overflow-y: auto;
+    pointer-events: auto !important; 
+    scrollbar-width: none;
+}
+
+#portfolio::-webkit-scrollbar { display: none; }
+
+/* Pastikan judul tidak tertutup */
+#portfolio .section-title {
+    margin-bottom: 40px;
+    flex-shrink: 0; /* Mencegah judul menciut */
+}
+
+#portfolio .section-subtitle {
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    max-width: 100%;
+}
+
+.porto-display {
+    display: flex;
+    flex-direction: column;
+    gap: 50px; 
+    width: 100%;
+    max-width: 1000px; /* Diperlebar sedikit agar lebih lega */
+    padding: 20px;
+    margin-top: 20px; /* Kecilkan margin-top agar tidak mendorong judul keluar */
+    box-sizing: border-box;
+}
+
+.porto-item {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    /* ... kode lama kamu ... */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efek pegas */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    
+    /* JURUS BIAR MENCIUT */
+    width: fit-content; 
+    max-width: 90%; /* Agar tidak overflow di layar kecil */
+    margin-left: 0; /* Default kiri */
+}
+
+/* Atur posisi selang-seling untuk container yang menciut */
+.porto-item:nth-child(even) {
+    flex-direction: row-reverse;
+    margin-left: auto; /* Paksa bar genap ke kanan */
+}
+
+/* Selang-seling */
+.porto-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.porto-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--porto-clr); /* Border berubah sesuai tema project */
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 0 20px var(--porto-clr);
+}
+
+.porto-item:active {
+    transform: scale(0.98);
+}
+
+/* Rapikan teks di placeholder gambar */
+.img-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* Menghilangkan garis bawah link & Styling Button */
+.btn-porto {
+    text-decoration: none !important; /* Hilangkan garis bawah */
+    padding: 10px 25px;
+    background: var(--porto-clr) !important;
+    color: #000 !important;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: inline-block;
+    transition: 0.3s ease;
+}
+
+/* Hover & Active pada Link/Button */
+.btn-porto:hover {
+    background: #00cc6e;
+    transform: translateY(-3px);
+    filter: brightness(1.2);
+    box-shadow: 0 5px 15px var(--porto-clr);
+}
+
+.btn-porto:active {
+    transform: scale(0.9);
+}
+
+.btn-porto.outline {
+    background: transparent !important;
+    color: var(--porto-clr) !important;
+    border: 1px solid var(--porto-clr) !important;
+}
+
+.btn-porto.outline:hover {
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+}
+
+.porto-links a.outline {
+    background-color: white;
+    color: black;
+}
+
+.porto-links a.btn-porto.outline:hover {
+    background: #a8a9a9;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgb(251, 253, 252);
+    color: black;
+}
+
+/* Styling Background Judul Project */
+.porto-title-bg {
+    background-color: var(--porto-clr);
+    color: #000 !important; /* Teks jadi gelap agar kontras */
+    width: fit-content;
+    padding: 5px 15px;
+    border-radius: 8px;
+    font-size: 1.5rem !important;
+    font-weight: bold;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Tag & Button mengikuti warna tema */
+.porto-tag {
+    background: var(--porto-clr) !important;
+    border-radius: 5px;
+    padding: 4px 12px;     /* Atas-Bawah: 4px, Kanan-Kiri: 12px */
+}
