@@ -953,77 +953,91 @@ h3.right-label {
 
 /* Untuk Tablet & HP (Layar di bawah 992px) */
 @media (max-width: 992px) {
-    /* Hero Section: Foto di atas, Teks di bawah */
+    /* 1. KUNCI: Biarkan konten bisa mengalir ke bawah di HP */
+    .content-wrapper {
+        overflow-y: auto !important; /* Izinkan scroll vertikal global di HP */
+        height: auto !important;
+    }
+
+    .page-section {
+        position: relative !important; /* Biarkan section bertumpuk secara alami */
+        height: auto !important;
+        min-height: 100vh;
+        opacity: 1 !important; /* Pastikan semua terlihat saat scroll di HP */
+        visibility: visible !important;
+        transform: none !important;
+        padding-bottom: 60px;
+        display: block; /* Agar konten tidak tertumpuk di tengah layar HP */
+    }
+
+    /* 2. Hero Section */
     .hero-container {
         flex-direction: column;
         text-align: center;
         gap: 30px;
+        padding-top: 100px;
     }
 
     .hero-image img {
-        width: 250px;
-        height: 250px;
+        width: 220px;
+        height: 220px;
     }
 
-    /* Skills: Kolom Kiri & Kanan jadi bertumpuk */
+    .hero-text h1 { font-size: 2.8rem; }
+
+    /* 3. Skills Section */
     .skills-main-container {
         flex-direction: column;
         gap: 40px;
         padding: 0 20px;
+        align-items: center;
     }
+    
+    .skills-left, .skills-right { width: 100%; }
 
-    /* Experience: Detail items berjejer ke bawah */
+    /* 4. Experience Section */
     .details-wrapper {
         flex-direction: column;
         align-items: center;
         gap: 20px;
     }
+    
+    .detail-item { width: 90%; }
 
-    /* Portfolio: Card jadi full lebar dan teks rata tengah */
+    /* 5. Portfolio Section */
     .porto-item, .porto-item:nth-child(even) {
-        flex-direction: column;
+        flex-direction: column !important;
         width: 100% !important;
         max-width: 100%;
         text-align: center;
+        margin-left: 0 !important;
     }
 
-    .porto-details {
-        text-align: center !important;
-    }
-
-    .porto-links {
-        justify-content: center !important;
-    }
+    .porto-visual { width: 100%; height: 180px; }
+    .porto-details { text-align: center !important; padding: 20px 0; }
+    .porto-links { justify-content: center !important; }
 }
 
 /* Untuk HP Kecil (Layar di bawah 600px) */
 @media (max-width: 600px) {
-    .hero-text h1 {
-        font-size: 2.5rem;
-    }
-
     .navbar {
-        padding: 15px 20px;
+        padding: 15px 10px;
     }
 
-    /* Sembunyikan navigasi teks, ganti dengan scroll atau menu icon nanti */
     .nav-links {
-        gap: 15px;
-        font-size: 0.8rem;
+        gap: 10px;
+        font-size: 0.75rem;
     }
 
-    /* Pastikan Timeline Education tetap rapi */
+    /* Pastikan Education Timeline tidak berantakan */
+    .edu-timeline { width: 95%; }
     .edu-item {
-        width: 100%;
-        padding: 20px;
+        width: 100% !important;
+        left: 0 !important;
+        padding: 20px 20px 20px 45px !important;
         text-align: left !important;
     }
     
-    .timeline-line {
-        left: 20px; /* Geser garis ke pinggir kiri */
-    }
-    
-    .edu-dot {
-        left: 12px !important;
-    }
+    .timeline-line { left: 20px !important; transform: none; }
+    .edu-dot { left: 12px !important; }
 }
