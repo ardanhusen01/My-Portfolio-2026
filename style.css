@@ -1,4 +1,9 @@
-/* ========== Animasi Background Website ========== */
+/* Untuk membuka ctrl k + ctrl j
+    Untuk menutup ctrl k + ctrl 0
+*/
+
+
+/* #region ========== Animasi Background Website ========== */
 #particles-js {
     position: fixed; /* Selalu di tempat meski di-scroll */
     width: 100%;
@@ -8,42 +13,10 @@
     top: 0;
     left: 0;
 }
-
-/* Pencegah scroll horizontal global */
-html, body {
-    overflow-x: hidden;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-}
-
-/* Biarkan Navbar bisa membungkus menu jika layar sempit */
-.navbar {
-    padding: 20px 5%;
-    box-sizing: border-box;
-}
-
-/* Buat section utama jadi transparan bagi kursor */
-.page-section, .experience {
-    pointer-events: none; /* Mouse akan "menembus" section ini ke bintang */
-}
-
-/* KEMBALIKAN kemampuan klik untuk elemen di dalamnya */
-.hero-container, 
-.exp-card, 
-.navbar, 
-.social-sidebar, 
-.hero-text, 
-.hero-image {
-    pointer-events: auto; /* Elemen ini tetap bisa diklik/disentuh */
-}
+/* #endregion */
 
 
-
-
-
-/* ========== Navigation ========== */
+/* #region ========== Navigation ========== */
 /* 1. Navbar Container */
 .navbar {
     display: flex;
@@ -88,12 +61,115 @@ html, body {
 .nav-links a:active {
     transform: scale(0.95); /* Sedikit mengecil saat diklik */
 }
+/* #endregion */
 
 
+/* #region ========== Transition Landing Page ========== */
+/* Panggung utama slide */
+.content-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* Mencegah scroll bar muncul saat transisi */
+}
+
+/* Base style untuk semua slide */
+.page-section {
+    position: absolute; /* Menumpuk di satu titik yang sama */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    
+    /* Efek animasi */
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.9); /* Efek zoom-in saat muncul */
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Saat slide aktif */
+.page-section.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    z-index: 10;
+}
+
+/* Buat section utama jadi transparan bagi kursor */
+.page-section, .experience {
+    pointer-events: none; /* Mouse akan "menembus" section ini ke bintang */
+}
+
+/* KEMBALIKAN kemampuan klik untuk elemen di dalamnya */
+.hero-container, 
+.exp-card, 
+.navbar, 
+.social-sidebar, 
+.hero-text, 
+.hero-image {
+    pointer-events: auto; /* Elemen ini tetap bisa diklik/disentuh */
+}
+/* #endregion */
 
 
+/* #region ========== LANDING PAGE 1 ========== */
+/* Container Utama Hero */
+/* Pengatur posisi foto di kiri, teks di kanan */
+.hero-container {
+    display: flex;
+    align-items: center;
+    gap: 80px; /* Jarak antara foto dan teks */
+    max-width: 1200px;
+}
 
-/* ========== Medsos ========= */
+/* Styling Foto */
+.hero-image img {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #eeefef;
+    /* Efek cahaya biru di luar angkasa */
+    box-shadow: 0 0 30px rgba(127, 129, 138, 0.6), 0 0 60px rgba(68, 68, 71, 0.3);
+    transition: 0.5s;
+}
+
+.hero-image img:hover {
+    transform: scale(1.2); /* Sedikit membesar saat disentuh */
+    box-shadow: 0 0 50px rgba(93, 94, 95, 0.9);
+}
+
+/* Styling Teks */
+.hero-text h1 {
+    font-size: 4.5rem; /* Ukuran nama besar dan tegas */
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.1;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.hero-text h4 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+.hero-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 500px; /* Agar teks deskripsi tidak terlalu melebar */
+    margin-bottom: 30px;
+    color: #cccccc;
+}
+
+/* ---------- Medsos ---------- */
 .social-sidebar {
     position: absolute; 
     bottom: 30px;    /* Jarak dari bawah layar */
@@ -160,296 +236,349 @@ html, body {
     background: #1877f2;
     box-shadow: 0 0 20px rgba(24, 119, 242, 0.6);
 }
+/* #endregion */
 
 
+/* #region ========== LANDING PAGE 2 - NEW SKILLS DESIGN ========== */
 
-
-
-/* ========== Transition Landing Page ========== */
-/* Panggung utama slide */
-.content-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden; /* Mencegah scroll bar muncul saat transisi */
-}
-
-/* Base style untuk semua slide */
-.page-section {
-    position: absolute; /* Menumpuk di satu titik yang sama */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    
-    /* Efek animasi */
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(0.9); /* Efek zoom-in saat muncul */
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Saat slide aktif */
-.page-section.active {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-    z-index: 10;
-}
-
-
-
-
-
-/* ---------- LANDING PAGE 1 ---------- */
-/* Container Utama Hero */
-/* Pengatur posisi foto di kiri, teks di kanan */
-.hero-container {
-    display: flex;
-    align-items: center;
-    gap: 80px; /* Jarak antara foto dan teks */
-    max-width: 1200px;
-}
-
-/* Styling Foto */
-.hero-image img {
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #eeefef;
-    /* Efek cahaya biru di luar angkasa */
-    box-shadow: 0 0 30px rgba(127, 129, 138, 0.6), 0 0 60px rgba(68, 68, 71, 0.3);
-    transition: 0.5s;
-}
-
-.hero-image img:hover {
-    transform: scale(1.2); /* Sedikit membesar saat disentuh */
-    box-shadow: 0 0 50px rgba(93, 94, 95, 0.9);
-}
-
-/* Styling Teks */
-.hero-text h1 {
-    font-size: 4.5rem; /* Ukuran nama besar dan tegas */
-    font-weight: 700;
-    margin-bottom: 10px;
-    line-height: 1.1;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-}
-
-.hero-text h4 {
-    font-size: 1.5rem;
-    font-weight: 300;
-    letter-spacing: 2px;
-    margin-bottom: 25px;
-    opacity: 0.9;
-}
-
-.hero-text p {
-    font-size: 1rem;
-    line-height: 1.8;
-    max-width: 500px; /* Agar teks deskripsi tidak terlalu melebar */
-    margin-bottom: 30px;
-    color: #cccccc;
-}
-
-
-
-
-
-
-
-
-
-
-
-/* ---------- LANDING PAGE 2 ---------- */
-/* --- SKILLS STYLE --- */
 #skills {
     display: flex;
-    flex-direction: column; 
-    align-items: center; /* Menjaga Judul tetap di tengah */
-    justify-content: flex-start;
-    padding-top: 100px;
-}
-
-.section-title {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 60px; /* Jarak ke konten di bawahnya */
-}
-
-/* WADAH KONTEN: Baru pakai Flex di sini */
-.skills-main-container {
-    display: flex; /* Membagi Kiri dan Kanan */
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 80px; /* Jarak lega antara kolom */
-    width: 100%;
-    max-width: 1100px;
+    padding-top: 6vh;
+    padding-bottom: 4vh;
+    height: 100vh;
     pointer-events: auto;
-}
-
-/* Atur proporsi kolom */
-.skills-left {
-    flex: 1.2; /* Sedikit lebih lebar untuk Technical */
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.skills-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
-}
-
-/* Label Grup */
-.left-label {
-    color: #fefefe; /* Ubah warna teks jadi gelap agar kontras dengan background putih */
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin: 0; 
-    margin-bottom: 20px; 
-    text-align: left;
-    background-color: #2b3030; /* Coba pakai warna hijau neon kamu sebagai background */
-    display: block;        /* Ubah ke block dulu */
-    width: fit-content;    /* PAKSA lebar hanya sebatas isi teksnya */
-    
-    /* Membuat sudut membulat */
-    padding: 5px 20px; /* Tambah padding kiri-kanan agar teks tidak mepet ke pinggiran bulat */
-    border-radius: 50px; /* Angka besar seperti 50px akan membuatnya berbentuk kapsul/pil */
-    
-    /* Tambahan agar lebih keren */
-    font-weight: bold;
-    box-shadow: 0 0 15px rgb(254, 255, 255); /* Efek glow neon */
-}
-
-/* Class khusus untuk sisi kanan agar tidak 'balapan' margin dengan browser */
-.right-label {
-    margin: 0 !important; /* Reset total semua margin bawaan */
-    padding: 0;
-    
-}
-
-h3.right-label {
-     color: #fefefe; /* Ubah warna teks jadi gelap agar kontras dengan background putih */
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin: 0; 
-    margin-bottom: 20px; 
-    text-align: left;
-    background-color: #2b3030; /* Coba pakai warna hijau neon kamu sebagai background */
-    display: block;        /* Ubah ke block dulu */
-    width: fit-content;    /* PAKSA lebar hanya sebatas isi teksnya */
-    
-    /* Membuat sudut membulat */
-    padding: 5px 20px; /* Tambah padding kiri-kanan agar teks tidak mepet ke pinggiran bulat */
-    border-radius: 50px; /* Angka besar seperti 50px akan membuatnya berbentuk kapsul/pil */
-    
-    /* Tambahan agar lebih keren */
-    font-weight: bold;
-    box-shadow: 0 0 15px rgb(254, 255, 255); /* Efek glow neon */
-}
-
-.tag-group.right-label {
-    margin-bottom: 15px !important; /* Jarak antar grup tag */
-}
-
-.tag-group h4 {
-    margin: 0;
-    margin-bottom: 10px; /* Jarak dari sub-judul ke bulatan tag */
-    font-size: 1rem;
-    color: #fff;
-}
-
-/* Skill Group Styling */
-.skill-group {
-    text-align: left;
-}
-
-.skill-info {
-    display: flex;
-    justify-content: space-between;
-    font-weight: 500;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-}
-
-.skill-desc {
-    font-size: 0.8rem;
-    color: #999;
-    margin-top: 10px;
-    line-height: 1.5;
-}
-
-/* Sisi Kanan (Tags Styling) */
-.tag-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-/* Sisi Kanan Tags */
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 10px;
-}
-
-.tag {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px 16px;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    transition: 0.3s ease;
-}
-
-.tag:hover {
-    border-color: #f1f1f1;
-    background: rgb(110, 105, 105);
-    transform: translateY(-3px);
-}
-
-/* Progress Bar (Gunakan logic transform yang sudah kita buat) */
-.progress-bar {
-    height: 6px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
     overflow: hidden;
 }
 
+.skills-section-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3vh;
+}
+
+.skills-section-title h2 {
+    font-size: 2.5vw;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    margin: 0;
+}
+
+/* ========== TWO COLUMN LAYOUT ========== */
+.skills-two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5vw;
+    width: 90vw;
+    max-width: 65vw;
+    height: 65vh;
+    margin: 0 auto;
+    pointer-events: auto;
+    padding: 0;
+}
+
+/* ========== SKILLS COLUMNS ========== */
+.skills-column {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5vw;
+    padding: 2vw 1.5vw;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: scale(1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.skills-column:hover {
+    transform: scale(1.05);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 60px rgba(255, 255, 255, 0.25);
+}
+
+.column-title {
+    font-size: 1.3vw;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0 0 1.2vw 0;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* ========== HARD SKILLS - PROGRESS BARS ========== */
+.skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9vw;
+    pointer-events: auto;
+    flex: 1;
+    margin-top: -10px;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2vw;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0.5vw;
+    border-radius: 0.8vw;
+    position: relative;
+    flex: 1;
+}
+
+.skill-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.skill-item.active {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.skill-name-label {
+    font-size: 0.7vw;
+    font-weight: 600;
+    color: #e0e0e0;
+    letter-spacing: 0.7px;
+    text-transform: capitalize;
+    line-height: 1.1;
+}
+
+.progress-bar {
+    position: relative;
+    width: 100%;
+    height: 1.2vw;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 0.6vw;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .progress-fill {
+    width: var(--skill-percentage);
     height: 100%;
-    background: var(--clr);
-    box-shadow: 0 0 10px var(--clr);
-    width: var(--w);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 1.5s cubic-bezier(0.1, 0.42, 0.41, 1);
+    background: linear-gradient(90deg, var(--skill-color), rgba(255, 255, 255, 0.2));
+    border-radius: 15px;
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 0 15px var(--skill-color);
 }
 
-.page-section.active .progress-fill {
-    transform: scaleX(1);
+.progress-bar:hover .progress-fill {
+    box-shadow: 0 0 30px var(--skill-color), inset 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
+.progress-text {
+    position: absolute;
+    right: 0.6vw;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.55vw;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+.skill-description-box {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-size: 0.60vw;
+    color: #b0e0e6;
+    font-style: italic;
+    margin-top: 0;
+    padding: 0 0;
+    line-height: 1.2;
+}
+
+.skill-item.active .skill-description-box {
+    max-height: 4.5vw;
+    padding: 0.3vw 0;
+    margin-top: 0.2vw;
+    color: #a0d5ff;
+}
+
+/* ========== BENTO GRID - SOFT SKILLS ========== */
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8vw;
+    pointer-events: auto;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    align-content: start;
+}
+
+/* Base Bento Card */
+.bento-card {
+    background: rgba(15, 20, 35, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.2vw;
+    padding: 1vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    height: 13vh;
+}
+
+/* Accent Border based on color */
+.bento-card.green {
+    --accent-color: #10b981;
+}
+
+.bento-card.gold {
+    --accent-color: #f59e0b;
+}
+
+.bento-card.blue {
+    --accent-color: #3b82f6;
+}
+
+.bento-card.purple {
+    --accent-color: #a855f7;
+}
+
+.bento-card.cyan {
+    --accent-color: #06b6d4;
+}
+
+/* Languages card spans 2 columns */
+.bento-card.languages {
+    grid-column: 1 / -1;
+    height: 10vh;
+    padding: 1vw 1.5vw;
+}
+
+/* Card Icon */
+.card-icon {
+    font-size: 2.2vw;
+    margin-bottom: 0.4vw;
+    color: var(--accent-color);
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3);
+}
+
+/* Card Title */
+.card-title {
+    font-size: 0.8vw;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0.2vw 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Card Description */
+.card-description {
+    font-size: 0.62vw;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0.3vw 0 0;
+    line-height: 1.2;
+    font-style: italic;
+}
+
+/* Languages Content */
+.languages-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    gap: 1.5vw;
+}
+
+.language-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.language-divider {
+    width: 1px;
+    height: 5vh;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.lang-text {
+    margin-top: 0.4vw;
+}
+
+.card-subtitle {
+    font-size: 0.6vw;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0.1vw 0;
+    font-style: italic;
+}
+
+/* Hover Effects */
+.bento-card:hover {
+    transform: translateY(-0.5vw);
+    background: rgba(15, 20, 35, 0.8);
+    box-shadow: 
+        0 0 20px rgba(var(--accent-rgb), 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-color: rgba(var(--accent-rgb), 0.5);
+}
+
+.bento-card:hover .card-icon {
+    transform: scale(1.15) rotateZ(5deg);
+    filter: drop-shadow(0 0 15px var(--accent-color));
+}
+
+.bento-card:hover .card-title {
+    color: var(--accent-color);
+    text-shadow: 0 0 15px rgba(var(--accent-rgb), 0.5);
+}
+
+/* Green Accent RGB */
+.bento-card.green {
+    --accent-rgb: 16, 185, 129;
+}
+
+/* Gold Accent RGB */
+.bento-card.gold {
+    --accent-rgb: 245, 158, 11;
+}
+
+/* Blue Accent RGB */
+.bento-card.blue {
+    --accent-rgb: 59, 130, 246;
+}
+
+/* Purple Accent RGB */
+.bento-card.purple {
+    --accent-rgb: 168, 85, 247;
+}
+
+/* Cyan Accent RGB */
+.bento-card.cyan {
+    --accent-rgb: 6, 182, 212;
+}
+
+/* #endregion */
 
 
-
-
-
-
-
-
-
-/* ---------- LANDING PAGE 3 ---------- */
+/* #region ========== LANDING PAGE 3 ========== */
 /* Menaikkan judul ke atas */
 /* Container Utama Section Experience */
 #experience {
@@ -653,17 +782,10 @@ h3.right-label {
     margin-bottom: 5px;
     font-size: 1.1rem;
 }
+/* #endregion */
 
-
-
-
-
-
-
-
-
-    
-/* ---------- LANDING PAGE 4 ---------- */
+   
+/* #region ========== LANDING PAGE 4 ========== */
 /* --- EDUCATION STYLE --- */
 #education {
     display: flex;
@@ -725,6 +847,7 @@ h3.right-label {
 
 .edu-item.left { 
     left: 0; text-align: right; transform: translateX(-50px); }
+
 .edu-item.right { 
     left: 50%; text-align: left; transform: translateX(50px); }
 
@@ -742,6 +865,7 @@ h3.right-label {
 
 .left .edu-dot { 
     right: -7.5px; }
+
 .right .edu-dot { 
     left: -7.5px; }
 
@@ -766,6 +890,7 @@ h3.right-label {
 
 .edu-date { 
     color: var(--edu-clr); /* Tanggal mengikuti warna tema */ font-weight: bold; font-size: 0.85rem; }
+
 .edu-badge {
     display: inline-block;
     padding: 3px 10px;
@@ -776,17 +901,10 @@ h3.right-label {
     font-weight: bold;
     margin-top: 10px;
 }
+/* #endregion */
 
 
-
-
-
-
-
-
-
-
-/* ---------- LANDING PAGE 5 ---------- */
+/* #region ========== LANDING PAGE 5 ========== */
 /* --- PORTFOLIO STYLE --- */
 #portfolio {
     /* Gunakan padding untuk mengatur jarak konten dari tepi layar */
@@ -807,7 +925,8 @@ h3.right-label {
     scrollbar-width: none;
 }
 
-#portfolio::-webkit-scrollbar { display: none; }
+#portfolio::-webkit-scrollbar { 
+    display: none; }
 
 /* Pastikan judul tidak tertutup */
 #portfolio .section-title {
@@ -954,125 +1073,42 @@ h3.right-label {
     border-radius: 5px;
     padding: 4px 12px;     /* Atas-Bawah: 4px, Kanan-Kiri: 12px */
 }
+/* #endregion */
 
 
+/* #region ========== RESPONSIVE DESIGN ========== */
 
-
-
-
-
-
-
-
-/* ---------- RESPONSIVE DESIGN (OPTIMIZED) ---------- */
-
-@media (max-width: 992px) {
-    /* 1. KUNCI UTAMA: Matikan sistem 'Slide' kaku di HP */
-    .content-wrapper {
-        overflow-y: visible !important; 
-        height: auto !important;
-        display: block !important;
-    }
-
-    .page-section {
-        position: relative !important; /* Slide tidak lagi menumpuk, tapi berjejer ke bawah */
-        height: auto !important;
-        min-height: 100vh;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 100px 20px 60px 20px !important; /* Ruang napas agar tidak nabrak navbar */
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: none !important;
-        box-sizing: border-box;
-    }
-
-    /* 2. About / Hero Section */
-    .hero-container {
-        flex-direction: column;
-        gap: 30px;
-        width: 100%;
-    }
-
-    .hero-image img {
-        width: 200px; /* Ukuran lebih pas untuk HP */
-        height: 200px;
-    }
-
-    .hero-text {
-        text-align: center;
-    }
-
-    .hero-text h1 { font-size: 2.5rem; }
-    .hero-text p { max-width: 100%; }
-
-    /* 3. Skills Section */
-    .skills-main-container {
-        flex-direction: column;
-        gap: 40px;
-        width: 100%;
-    }
-
-    /* 4. Portfolio Section */
-    .porto-item {
-        width: 100% !important;
-        max-width: 100% !important;
-        flex-direction: column !important; /* Selalu gambar di atas teks di HP */
-        margin: 0 0 30px 0 !important;
-    }
-
-    .porto-visual {
-        width: 100%;
-        height: 200px;
-    }
-
-    .porto-details {
-        text-align: center;
-        padding: 20px 0 0 0;
-    }
-
-    .porto-links {
-        justify-content: center;
-    }
+/* Hamburger Menu - Hidden di Desktop */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    position: fixed;
+    right: 30px;
+    top: 25px;
+    z-index: 110;
 }
 
-/* Untuk Smartphone Kecil (max-width: 600px) */
-@media (max-width: 600px) {
-    .nav-links {
-        gap: 10px;
-    }
-    
-    .nav-links a {
-        font-size: 0.7rem; /* Kecilkan teks menu agar tidak overflow */
-    }
-
-    .section-title h2 {
-        font-size: 1.8rem;
-    }
-
-    /* Memperbaiki Timeline Education di layar paling kecil */
-    .edu-timeline {
-        padding-left: 20px;
-    }
-
-    .timeline-line {
-        left: 0 !important;
-    }
-
-    .edu-item {
-        width: 100% !important;
-        left: 0 !important;
-        padding: 20px 0 20px 30px !important;
-        text-align: left !important;
-    }
-
-    .edu-dot {
-        left: -7px !important;
-    }
-    
-    .edu-content {
-        border-left: 4px solid var(--edu-clr) !important;
-        border-right: none !important;
-    }
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: white;
+    transition: 0.3s;
+    border-radius: 3px;
 }
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* #endregion */
+/* #endregion */
